@@ -84,3 +84,72 @@ Cargo will download the `rand` crate from crates.io and include it in your proje
 |----------|--------------|
 | `cargo build` | Builds the executable, but does **not** run it. |
 | `cargo check` | Only checks for **errors**, doesn’t build the executable (faster). |
+
+##🧩 Immutable vs Mutable in Rust
+Concept	Description
+Immutable (let)	Variables are immutable by default — their values cannot be changed after assignment.
+Mutable (let mut)	To allow value changes, declare the variable with the mut keyword.
+🧱 Example: Immutable Variable
+fn main() {
+    let x = 5;
+    println!("x = {}", x);
+
+    x = 10; // ❌ Error: cannot assign twice to immutable variable
+}
+
+
+🧠 Explanation:
+let x = 5; makes x immutable. Trying to reassign it causes a compiler error.
+
+🔧 Example: Mutable Variable
+fn main() {
+    let mut x = 5;
+    println!("x = {}", x);
+
+    x = 10; // ✅ Works fine
+    println!("x = {}", x);
+}
+
+
+🧠 Explanation:
+Adding mut allows x to change its value safely.
+
+📜 Key Notes
+Feature	Immutable	Mutable
+Declaration	let x = 5;	let mut x = 5;
+Can reassign?	❌ No	✅ Yes
+Default behavior	Immutable	Must use mut
+Benefit	Safety and predictability	Flexibility when needed
+
+##Variable Shadowing in Rust
+Concept	Description
+Shadowing	Re-declaring a variable with the same name using let — this creates a new variable that “shadows” (hides) the old one.
+Mutability	Controls whether a variable’s value can change, but doesn’t affect shadowing.
+🧠 Example from your code
+fn main() {
+    let grams_of_protein: &str = "100.345";
+    let grams_of_protein: f64 = 100.345;
+    let mut grams_of_protein: i32 = 100;
+
+    grams_of_protein = 105;
+    println!("{}", grams_of_protein);
+}
+
+🧩 What’s happening
+
+let grams_of_protein: &str = "100.345";
+→ A string slice is created.
+
+let grams_of_protein: f64 = 100.345;
+→ New variable shadows the previous one (old one is gone).
+
+let mut grams_of_protein: i32 = 100;
+→ Another new variable, mutable this time, shadows the f64 one.
+
+grams_of_protein = 105;
+→ Works fine, because this last one is mutable.
+
+🧱 Key Idea
+
+Shadowing lets you reuse the same variable name while changing its type or mutability,
+but it’s actually creating a new variable, not modifying the old one.
