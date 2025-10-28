@@ -153,3 +153,74 @@ grams_of_protein = 105;
 
 Shadowing lets you reuse the same variable name while changing its type or mutability,
 but it’s actually creating a new variable, not modifying the old one.
+
+##Constants
+
+Constants in Rust
+
+Constants are values that never change during the entire program.
+
+Declared using const, not let.
+
+Must always have a type annotation.
+
+Are always immutable (can’t use mut).
+
+Usually written in UPPERCASE letters by convention.
+
+🧩 Example:
+const MAX_POINTS: u32 = 100_000;
+
+🧠 Remember:
+
+Stored in the program’s memory at compile time.
+
+Can be used anywhere, even outside functions.
+
+Good for fixed values like limits, units, or configuration constants.
+
+##ALias or meters in Rust
+
+🧩 1. Type Alias in Rust
+
+A type alias lets you create a new name for an existing type — kind of like a nickname.
+
+💡 Example:
+type Meters = u32;
+
+let distance: Meters = 50;
+
+
+✅ Here, Meters is just another name for u32.
+It doesn’t create a new type — it just makes code more readable.
+
+🧠 Why Use It
+
+To make complex types easier to understand.
+
+To give meaning to numbers (like Meters, Seconds, Kilograms, etc.).
+
+##Compiler Directive (in simple terms)
+
+A compiler directive is a special instruction you give to the compiler — not part of your normal code —
+that tells it how to handle or interpret your code.
+
+Think of it like a note to the compiler saying:
+
+“Hey compiler, do this differently or skip this warning!”
+
+🧩 In Rust:
+
+Compiler directives are written as attributes, like:
+
+#![allow(unused_variables)]
+
+
+or
+
+#[derive(Debug)]
+
+🧠 Two Types:
+Type	Example	Meaning
+Inner attribute	#![...]	Applies to the whole file or crate
+Outer attribute	#[...]	Applies only to the next item (like a function, struct, etc.)
