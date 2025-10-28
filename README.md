@@ -121,11 +121,16 @@ Can reassign?	❌ No	✅ Yes
 Default behavior	Immutable	Must use mut
 Benefit	Safety and predictability	Flexibility when needed
 
-##Variable Shadowing in Rust
-Concept	Description
-Shadowing	Re-declaring a variable with the same name using let — this creates a new variable that “shadows” (hides) the old one.
-Mutability	Controls whether a variable’s value can change, but doesn’t affect shadowing.
-🧠 Example from your code
+## 🧩 Variable Shadowing in Rust
+
+### 🧠 Concept
+Shadowing means **re-declaring a variable with the same name using `let`** — this creates a new variable that “shadows” (hides) the old one.
+
+### 🧱 Mutability
+Mutability controls whether a variable’s value can change, but it doesn’t affect shadowing.
+
+### 💻 Example
+```rust
 fn main() {
     let grams_of_protein: &str = "100.345";
     let grams_of_protein: f64 = 100.345;
@@ -134,93 +139,87 @@ fn main() {
     grams_of_protein = 105;
     println!("{}", grams_of_protein);
 }
+```
 
-🧩 What’s happening
+### 🧠 What’s Happening
+- `let grams_of_protein: &str = "100.345";` → A string slice is created.  
+- `let grams_of_protein: f64 = 100.345;` → New variable shadows the previous one (old one is gone).  
+- `let mut grams_of_protein: i32 = 100;` → Another new variable, mutable this time, shadows the f64 one.  
+- `grams_of_protein = 105;` → Works fine because this last one is mutable.
 
-let grams_of_protein: &str = "100.345";
-→ A string slice is created.
+### 🧱 Key Idea
+> Shadowing lets you reuse the same variable name while changing its type or mutability — it’s actually creating a new variable, not modifying the old one.
 
-let grams_of_protein: f64 = 100.345;
-→ New variable shadows the previous one (old one is gone).
+---
 
-let mut grams_of_protein: i32 = 100;
-→ Another new variable, mutable this time, shadows the f64 one.
+## 🔢 Constants in Rust
 
-grams_of_protein = 105;
-→ Works fine, because this last one is mutable.
+### 🧩 Concept
+Constants are **values that never change** during the entire program.
 
-🧱 Key Idea
+### 🧱 Rules
+- Declared using `const`, not `let`.  
+- Must always have a **type annotation**.  
+- Are **always immutable** (can’t use `mut`).  
+- Usually written in **UPPERCASE** by convention.
 
-Shadowing lets you reuse the same variable name while changing its type or mutability,
-but it’s actually creating a new variable, not modifying the old one.
-
-##Constants
-
-Constants in Rust
-
-Constants are values that never change during the entire program.
-
-Declared using const, not let.
-
-Must always have a type annotation.
-
-Are always immutable (can’t use mut).
-
-Usually written in UPPERCASE letters by convention.
-
-🧩 Example:
+### 💻 Example
+```rust
 const MAX_POINTS: u32 = 100_000;
+```
 
-🧠 Remember:
+### 🧠 Remember
+- Stored in the program’s memory at **compile time**.  
+- Can be used **anywhere**, even outside functions.  
+- Great for **fixed values** like limits, units, or configurations.
 
-Stored in the program’s memory at compile time.
+---
 
-Can be used anywhere, even outside functions.
+## ⚙️ Type Alias (e.g., Meters) in Rust
 
-Good for fixed values like limits, units, or configuration constants.
+### 🧩 Concept
+A **type alias** lets you create a new name for an existing type — like giving it a nickname.
 
-##ALias or meters in Rust
-
-🧩 1. Type Alias in Rust
-
-A type alias lets you create a new name for an existing type — kind of like a nickname.
-
-💡 Example:
+### 💻 Example
+```rust
 type Meters = u32;
 
 let distance: Meters = 50;
+```
 
-
-✅ Here, Meters is just another name for u32.
+✅ Here, `Meters` is just another name for `u32`.  
 It doesn’t create a new type — it just makes code more readable.
 
-🧠 Why Use It
+### 🧠 Why Use It
+- Makes complex types easier to understand.  
+- Adds meaning to numbers (like `Meters`, `Seconds`, `Kilograms`, etc.).
 
-To make complex types easier to understand.
+---
 
-To give meaning to numbers (like Meters, Seconds, Kilograms, etc.).
+## ⚙️ Compiler Directive (Simple Explanation)
 
-##Compiler Directive (in simple terms)
+### 🧩 Concept
+A **compiler directive** is a special **instruction for the compiler**, not your program.  
+It tells the compiler **how to handle** or **interpret** your code.
 
-A compiler directive is a special instruction you give to the compiler — not part of your normal code —
-that tells it how to handle or interpret your code.
+> Think of it like a note to the compiler saying:  
+> “Hey compiler, do this differently or skip this warning!”
 
-Think of it like a note to the compiler saying:
-
-“Hey compiler, do this differently or skip this warning!”
-
-🧩 In Rust:
-
-Compiler directives are written as attributes, like:
-
+### 💻 In Rust
+Compiler directives are written as **attributes**, like:
+```rust
 #![allow(unused_variables)]
-
-
+```
 or
-
+```rust
 #[derive(Debug)]
+```
 
-🧠 Two Types:
-Type	Example	Meaning
-Inner attribute	#![...]	Applies to the whole file or crate
-Outer attribute	#[...]	Applies only to the next item (like a function, struct, etc.)
+### 🧠 Two Types
+
+| Type | Example | Meaning |
+|-------|----------|----------|
+| **Inner attribute** | `#![...]` | Applies to the **whole file** or **crate** |
+| **Outer attribute** | `#[...]` | Applies only to the **next item** (function, struct, etc.) |
+
+---
